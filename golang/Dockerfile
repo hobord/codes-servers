@@ -38,7 +38,7 @@ RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publisher
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/GoogleCloudTools/vsextensions/cloudcode/0.0.10/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/googlecloudtools.cloudcode-0.0.10
 
 
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin
 
 #Golang Specific
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/Go/0.11.4/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/ms-vscode.go-0.11.4
