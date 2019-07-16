@@ -24,7 +24,10 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
 RUN sudo apt-get update; sudo apt-get install -y bsdtar curl telnet iputils-ping netcat ssh rsync dnsutils gnupg gnupg2 && \
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
-    sudo apt-get update; sudo apt-get install -y google-cloud-sdk
+    sudo apt-get update; sudo apt-get install -y google-cloud-sdk && \
+    wget -q https://storage.googleapis.com/kubernetes-helm/helm-v2.14.2-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > helm && \
+    chmod +x helm && \
+    sudo mv helm /usr/local/bin/helm
 
 # VSCode extensions
 RUN mkdir -p /home/coder/.local/share/code-server/extensions/
