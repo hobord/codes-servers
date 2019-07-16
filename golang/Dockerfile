@@ -27,6 +27,7 @@ RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publisher
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/premparihar/vsextensions/gotestexplorer/0.1.10/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/premparihar.gotestexplorer-0.1.10
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/aleksandra/vsextensions/go-group-imports/1.0.1/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/aleksandra.go-group-imports-1.0.1
 
+# /home/coder/.config/sublime-text-3/Preferences.sublime-settings
 
 
 
@@ -36,4 +37,20 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 COPY --from=golang /usr/local/go /usr/local/go
 COPY --from=golang /go /home/coder/project
 
+#RUN go get -u github.com/ramya-rao-a/go-outline
+# RUN go get -u github.com/766b/go-outliner
+#RUN go get -u github.com/sqs/goreturns
+#RUN go get -u github.com/mdempsky/gocode
+#RUN go get -u github.com/uudashr/gopkgs/cmd/gopkgs
 
+RUN go install github.com/mdempsky/gocode
+RUN go install github.com/uudashr/gopkgs/cmd/gopkgs
+RUN go install github.com/ramya-rao-a/go-outline
+RUN go install github.com/acroca/go-symbols
+RUN go install golang.org/x/tools/cmd/guru
+RUN go install golang.org/x/tools/cmd/gorename
+RUN go install github.com/go-delve/delve/cmd/dlv
+RUN go install github.com/stamblerre/gocode
+RUN go install github.com/rogpeppe/godef
+RUN go install github.com/sqs/goreturns
+RUN go install golang.org/x/lint/golint
