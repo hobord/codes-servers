@@ -43,26 +43,15 @@ COPY --from=golang /go /home/coder/project
 #RUN go get -u github.com/mdempsky/gocode
 #RUN go get -u github.com/uudashr/gopkgs/cmd/gopkgs
 
-RUN go get -v github.com/mdempsky/gocode
-RUN go get -v github.com/uudashr/gopkgs/cmd/gopkgs
-RUN go get -v github.com/ramya-rao-a/go-outline
-RUN go get -v github.com/acroca/go-symbols
-RUN go get -v golang.org/x/tools/cmd/guru
-RUN go get -v golang.org/x/tools/cmd/gorename
-RUN go get -v github.com/go-delve/delve/cmd/dlv
-RUN go get -v github.com/stamblerre/gocode
-RUN go get -v github.com/rogpeppe/godef
-RUN go get -v github.com/sqs/goreturns
-RUN go get -v golang.org/x/lint/golint
+RUN go get -v github.com/mdempsky/gocode && go install -i github.com/mdempsky/gocode
+RUN go get -v github.com/uudashr/gopkgs/cmd/gopkgs && go install -i github.com/uudashr/gopkgs/cmd/gopkgs
+RUN go get -v github.com/ramya-rao-a/go-outline && go install -i github.com/ramya-rao-a/go-outline
+RUN go get -v github.com/acroca/go-symbols && go install -i github.com/acroca/go-symbols
+RUN go get -v golang.org/x/tools/cmd/guru && go install -i golang.org/x/tools/cmd/guru
+RUN go get -v golang.org/x/tools/cmd/gorename && go install -i golang.org/x/tools/cmd/gorename
+RUN go get -v github.com/go-delve/delve/cmd/dlv && go install -i github.com/go-delve/delve/cmd/dlv
+RUN go get -v github.com/stamblerre/gocode && go install -i github.com/stamblerre/gocode
+RUN go get -v github.com/rogpeppe/godef && go install -i github.com/rogpeppe/godef
+RUN go get -v github.com/sqs/goreturns && go install -i github.com/sqs/goreturns
+RUN go get -v golang.org/x/lint/golint && go install -i golang.org/x/lint/golint
 
-RUN go install -i github.com/mdempsky/gocode
-RUN go install -i github.com/uudashr/gopkgs/cmd/gopkgs
-RUN go install -i github.com/ramya-rao-a/go-outline
-RUN go install -i github.com/acroca/go-symbols
-RUN go install -i golang.org/x/tools/cmd/guru
-RUN go install -i golang.org/x/tools/cmd/gorename
-RUN go install -i github.com/go-delve/delve/cmd/dlv
-RUN go install -i github.com/stamblerre/gocode
-RUN go install -i github.com/rogpeppe/godef
-RUN go install -i github.com/sqs/goreturns
-RUN go install -i golang.org/x/lint/golint
