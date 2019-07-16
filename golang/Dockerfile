@@ -17,9 +17,16 @@ RUN chown -R 1000:1000 /go
 
 FROM codercom/code-server
 
+# Kubectl
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin
+
+# Google cloud sdk
+RUN sudo apt-get update; sudo apt-get install -y bsdtar curl telnet iputils-ping netcat ssh rsync dnsutils gnupg gnupg2 && \
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
+    sudo apt-get update; sudo apt-get install -y google-cloud-sdk
 
 # VSCode extensions
-RUN sudo apt-get update; sudo apt-get install -y bsdtar curl
 RUN mkdir -p /home/coder/.local/share/code-server/extensions/
 
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/eamodio/vsextensions/gitlens/9.6.3/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/eamodio.gitlens-9.6.3
@@ -36,9 +43,7 @@ RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publisher
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-kubernetes-tools/vsextensions/vscode-kubernetes-tools/1.0.1/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/ms-kubernetes-tools.vscode-kubernetes-tools-1.0.1
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ipedrazas/vsextensions/kubernetes-snippets/0.1.9/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/ipedrazas.kubernetes-snippets-0.1.9
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/GoogleCloudTools/vsextensions/cloudcode/0.0.10/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/googlecloudtools.cloudcode-0.0.10
-
-
-RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin
+RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/redhat/vsextensions/vscode-yaml/0.4.1/vspackage| bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/redhat.vscode-yaml-0.4.1
 
 #Golang Specific
 RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-vscode/vsextensions/Go/0.11.4/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/ms-vscode.go-0.11.4
