@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vscode-golang
+  namespace: my-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vscode-golang
+  template:
+    metadata:
+      labels:
+        app: vscode-golang
+    spec:
+      containers:
+      - image: hobord/code-server:golang
+        imagePullPolicy: Always
+        name: vscode-golang
+        args: [ "-H" ]  #Insecure don't use this in production
+        env:
+          - name: PASSWORD
+            value: "YourPasswordToHere"
+        resources: {}
+        ports:
+        - containerPort: 8443
+          name: http
+          protocol: TCP
+        securityContext:
+          privileged: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vscode-golang
+  namespace: my-namespace
+spec:
+  selector:
+    app: vscode-golang
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 8443
+  type: NodePort
+
+
