@@ -11,6 +11,7 @@ RUN go get -v github.com/stamblerre/gocode && go install -i github.com/stamblerr
 RUN go get -v github.com/rogpeppe/godef && go install -i github.com/rogpeppe/godef
 RUN go get -v github.com/sqs/goreturns && go install -i github.com/sqs/goreturns
 RUN go get -v golang.org/x/lint/golint && go install -i golang.org/x/lint/golint
+RUN go get -u github.com/go-delve/delve/cmd/dlv && go install -i github.com/go-delve/delve/cmd/dlv
 # RUN go get -v github.com/766b/go-outliner && go install -i github.com/766b/go-outliner
 RUN chown -R 1000:1000 /go
 
@@ -39,9 +40,17 @@ RUN code-server  --install-extension eamodio.gitlens \
     && code-server --install-extension coenraads.bracket-pair-colorizer \
     && code-server --install-extension mihelcic.colored-regions \
     && code-server --install-extension streetsidesoftware.code-spell-checker \
+    && code-server --install-extension fabiospampinato.vscode-diff \
+    && code-server --install-extension ryu1kn.partial-diff \
     && code-server --install-extension editorconfig.editorconfig \
     && code-server --install-extension christian-kohler.path-intellisense \
+    && code-server --install-extension PKief.material-icon-theme \
     && code-server --install-extension redhat.vscode-yaml \
+    && code-server --install-extension mohsen1.prettify-json \
+    && code-server --install-extension humao.rest-client \
+    && code-server --install-extension yzhang.markdown-all-in-one \
+    && code-server --install-extension jmmeessen.jenkins-declarative-support \
+    && code-server --install-extension secanis.jenkinsfile-support \
     && code-server --install-extension ms-vscode.sublime-keybindings \
     && code-server --install-extension ms-azuretools.vscode-docker \
     && code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
