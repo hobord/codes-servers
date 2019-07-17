@@ -41,8 +41,7 @@ RUN code-server  --install-extension eamodio.gitlens \
     && code-server --install-extension eg2.vscode-npm-script \
     && code-server --install-extension christian-kohler.npm-intellisense \
     && code-server --install-extension msjsdiag.debugger-for-chrome \
-    && code-server --install-extension octref.vetur \
-    && code-server --install-extension ducksoupdev.vue2 \
+    && code-server --install-extension mikael.angular-beastcode \
     && code-server --install-extension shinnn.stylelint
 
 COPY --from=node:12 /usr/local /usr/local
