@@ -55,7 +55,7 @@ RUN mkdir -p /home/coder/.local/share/code-server/extensions/
 # # RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/766b/vsextensions/go-outliner/0.1.20/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/766b.go-outliner-0.1.20
 # RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/premparihar/vsextensions/gotestexplorer/0.1.10/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/premparihar.gotestexplorer-0.1.10
 # RUN curl -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/aleksandra/vsextensions/go-group-imports/1.0.1/vspackage | bsdtar -xvf - extension && mv extension /home/coder/.local/share/code-server/extensions/aleksandra.go-group-imports-1.0.1
-
+ENV SERVICE_URL https://marketplace.visualstudio.com/_apis/public/gallery
 RUN code-server  --install-extension eamodio.gitlens \
     && code-server --install-extension donjayamanne.githistory \
     && code-server --install-extension huizhou.githd \
