@@ -27,12 +27,15 @@ docker run --rm -p 8443:8443 -v $(pwd):/home/coder/project/src/github.com/{YOURN
   You should run the container with privileged permission ```--privileged=true``` for run debugger.
 
 ### Chrome Debugger
-  Map the port 9222
+  Start the chrome:
   ```
-  docker run --rm -p 8443:8443 -p 9222:9222 -name vuejscode hobord/code-server:vuejs
+    chrome.exe --remote-debugging-port=9222
+  ```
+  make accessible from remotely
+  ```
+  ssh -L 0.0.0.0:9223:localhost:9222 localhost -N
+  ```
 
-  docker run --rm -p 8443:8443 -p 9222:9222 -name angularcode hobord/code-server:angular
-  ```
 ## Some Startup parameters
 
 - -N, --no-auth,  Start without requiring authentication.
@@ -40,3 +43,5 @@ docker run --rm -p 8443:8443 -v $(pwd):/home/coder/project/src/github.com/{YOURN
 - -P, --password <value>, DEPRECATED: Use the PASSWORD environment variable instead. Specify a password for authentication.
 - --disable-telemetry, Disables ALL telemetry.
 - --trust-proxy, Trust the X-Forwarded-For header, useful when using a reverse proxy.
+- --cert <value>
+- --cert-key <value>

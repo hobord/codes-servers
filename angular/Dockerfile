@@ -46,7 +46,7 @@ RUN code-server  --install-extension eamodio.gitlens \
 
 COPY --from=node:12 /usr/local /usr/local
 COPY --from=node:12 /opt /opt
-RUN npm i -g typescript sass
+RUN sudo npm i -g typescript sass
 
 
 
