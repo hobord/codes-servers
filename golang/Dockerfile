@@ -46,6 +46,7 @@ RUN code-server  --install-extension eamodio.gitlens \
     && code-server --install-extension christian-kohler.path-intellisense \
     && code-server --install-extension PKief.material-icon-theme \
     && code-server --install-extension redhat.vscode-yaml \
+    && code-server --install-extension kumar-harsh.graphql-for-vscode \
     && code-server --install-extension mohsen1.prettify-json \
     && code-server --install-extension humao.rest-client \
     && code-server --install-extension yzhang.markdown-all-in-one \
