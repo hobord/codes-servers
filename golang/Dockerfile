@@ -1,5 +1,5 @@
 FROM golang:1.11.12-stretch as golang
-RUN sudo apt-get install go-dep
+RUN apt-get install go-dep
 RUN go get -v github.com/mdempsky/gocode && go install -i github.com/mdempsky/gocode
 RUN go get -v github.com/uudashr/gopkgs/cmd/gopkgs && go install -i github.com/uudashr/gopkgs/cmd/gopkgs
 RUN go get -v github.com/ramya-rao-a/go-outline && go install -i github.com/ramya-rao-a/go-outline
