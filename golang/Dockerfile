@@ -52,6 +52,7 @@ RUN code-server  --install-extension eamodio.gitlens \
     && code-server --install-extension yzhang.markdown-all-in-one \
     && code-server --install-extension jmmeessen.jenkins-declarative-support \
     && code-server --install-extension secanis.jenkinsfile-support \
+    && code-server --install-extension bungcip.better-toml \
     && code-server --install-extension ms-vscode.sublime-keybindings \
     && code-server --install-extension ms-azuretools.vscode-docker \
     && code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
