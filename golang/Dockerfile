@@ -12,7 +12,8 @@ RUN go get -v github.com/rogpeppe/godef && go install -i github.com/rogpeppe/god
 RUN go get -v github.com/sqs/goreturns && go install -i github.com/sqs/goreturns
 RUN go get -v golang.org/x/lint/golint && go install -i golang.org/x/lint/golint
 RUN go get -u github.com/go-delve/delve/cmd/dlv && go install -i github.com/go-delve/delve/cmd/dlv
-RUN chown -R 1000:1000 /go
+RUN go get -u github.com/golang/dep/cmd/dep
+RUN rm -Rf /go/src && mkdir /go/src/ && chown -R 1000:1000 /go
 
 
 FROM codercom/code-server
@@ -24,7 +25,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s
 RUN sudo apt-get update; sudo apt-get install -y bsdtar curl telnet iputils-ping netcat ssh rsync dnsutils gnupg gnupg2 gcc && \
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
-    sudo apt-get update; sudo apt-get install -y google-cloud-sdk go-dep && \
+    sudo apt-get update; sudo apt-get install -y google-cloud-sdk && \
     wget -q https://storage.googleapis.com/kubernetes-helm/helm-v2.14.2-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > helm && \
     chmod +x helm && \
     sudo mv helm /usr/local/bin/helm
