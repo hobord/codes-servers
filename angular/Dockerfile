@@ -18,6 +18,7 @@ ENV SERVICE_URL https://marketplace.visualstudio.com/_apis/public/gallery
 RUN code-server  --install-extension eamodio.gitlens \
     && code-server --install-extension donjayamanne.githistory \
     && code-server --install-extension huizhou.githd \
+    && code-server --install-extension mhutchie.git-graph \
     && code-server --install-extension waderyan.gitblame \
     && code-server --install-extension coenraads.bracket-pair-colorizer \
     && code-server --install-extension mihelcic.colored-regions \
