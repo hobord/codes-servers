@@ -1,5 +1,5 @@
 FROM golang:1.11.12-stretch as golang
-
+RUN sudo apt-get install go-dep
 RUN go get -v github.com/mdempsky/gocode && go install -i github.com/mdempsky/gocode
 RUN go get -v github.com/uudashr/gopkgs/cmd/gopkgs && go install -i github.com/uudashr/gopkgs/cmd/gopkgs
 RUN go get -v github.com/ramya-rao-a/go-outline && go install -i github.com/ramya-rao-a/go-outline
@@ -12,7 +12,6 @@ RUN go get -v github.com/rogpeppe/godef && go install -i github.com/rogpeppe/god
 RUN go get -v github.com/sqs/goreturns && go install -i github.com/sqs/goreturns
 RUN go get -v golang.org/x/lint/golint && go install -i golang.org/x/lint/golint
 RUN go get -u github.com/go-delve/delve/cmd/dlv && go install -i github.com/go-delve/delve/cmd/dlv
-# RUN go get -v github.com/766b/go-outliner && go install -i github.com/766b/go-outliner
 RUN chown -R 1000:1000 /go
 
 
