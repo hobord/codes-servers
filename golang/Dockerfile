@@ -22,7 +22,7 @@ RUN go get -u -v github.com/fatih/gomodifytags
 RUN go get -u -v github.com/josharian/impl
 RUN go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 RUN go get -u -v github.com/golang/dep/cmd/dep
-RUN rm -Rf /go/src && mkdir /go/src/ && chown -R 1000:1000 /go
+
 
 
 FROM codercom/code-server
@@ -81,6 +81,6 @@ COPY --from=golang /usr/local/go /usr/local/go
 #UN wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz \
 #   && tar -xf go1.12.7.linux-amd64.tar.gz --directory /usr/local \
 #   && rm go1.12.7.linux-amd64.tar.gz
-COPY --chown=coder:coder --from=golang /go /home/coder/project
-
+COPY --chown=coder:coder --from=golang /go/bin /home/coder/project/bin
+RUN mkdir /home/coder/project/src
 
