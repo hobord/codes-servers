@@ -1,18 +1,27 @@
-FROM golang:1.11.12-stretch as golang
+FROM golang:1.12-stretch as golang
 
-RUN go get -v github.com/mdempsky/gocode && go install -i github.com/mdempsky/gocode
-RUN go get -v github.com/uudashr/gopkgs/cmd/gopkgs && go install -i github.com/uudashr/gopkgs/cmd/gopkgs
-RUN go get -v github.com/ramya-rao-a/go-outline && go install -i github.com/ramya-rao-a/go-outline
-RUN go get -v github.com/acroca/go-symbols && go install -i github.com/acroca/go-symbols
-RUN go get -v golang.org/x/tools/cmd/guru && go install -i golang.org/x/tools/cmd/guru
-RUN go get -v golang.org/x/tools/cmd/gorename && go install -i golang.org/x/tools/cmd/gorename
-RUN go get -v github.com/go-delve/delve/cmd/dlv && go install -i github.com/go-delve/delve/cmd/dlv
-RUN go get -v github.com/stamblerre/gocode && go install -i github.com/stamblerre/gocode
-RUN go get -v github.com/rogpeppe/godef && go install -i github.com/rogpeppe/godef
-RUN go get -v github.com/sqs/goreturns && go install -i github.com/sqs/goreturns
-RUN go get -v golang.org/x/lint/golint && go install -i golang.org/x/lint/golint
-RUN go get -u github.com/go-delve/delve/cmd/dlv && go install -i github.com/go-delve/delve/cmd/dlv
-RUN go get -u github.com/golang/dep/cmd/dep
+RUN go get -u -v github.com/mdempsky/gocode
+RUN go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs
+RUN go get -u -v github.com/ramya-rao-a/go-outline
+RUN go get -u -v github.com/acroca/go-symbols
+RUN go get -u -v golang.org/x/tools/cmd/godoc
+RUN go get -u -v github.com/zmb3/gogetdoc
+RUN go get -u -v golang.org/x/tools/cmd/guru
+RUN go get -u -v golang.org/x/tools/cmd/gorename
+RUN go get -u -v github.com/go-delve/delve/cmd/dlv
+RUN go get -u -v github.com/stamblerre/gocode
+RUN go get -u -v github.com/rogpeppe/godef
+RUN go get -u -v github.com/sqs/goreturns
+RUN go get -u -v golang.org/x/lint/golint
+RUN go get -u -v github.com/go-delve/delve/cmd/dlv
+RUN go get -u -v github.com/sourcegraph/go-langserver
+RUN go get -u -v golang.org/x/tools/cmd/goimports
+RUN go get -u -v github.com/cweill/gotests/...
+RUN go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs
+RUN go get -u -v github.com/fatih/gomodifytags
+RUN go get -u -v github.com/josharian/impl
+RUN go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
+RUN go get -u -v github.com/golang/dep/cmd/dep
 RUN rm -Rf /go/src && mkdir /go/src/ && chown -R 1000:1000 /go
 
 
@@ -21,7 +30,7 @@ FROM codercom/code-server
 # Kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin
 
-# Google cloud sdk
+# Google cloud sdk and some other tools
 RUN sudo apt-get update; sudo apt-get install -y bsdtar curl telnet iputils-ping netcat ssh rsync dnsutils gnupg gnupg2 gcc && \
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
@@ -69,6 +78,9 @@ ENV GOLANG_VERSION 1.12.7
 ENV GOPATH /home/coder/project
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 COPY --from=golang /usr/local/go /usr/local/go
+#UN wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz \
+#   && tar -xf go1.12.7.linux-amd64.tar.gz --directory /usr/local \
+#   && rm go1.12.7.linux-amd64.tar.gz
 COPY --chown=coder:coder --from=golang /go /home/coder/project
 
 
