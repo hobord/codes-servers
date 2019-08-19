@@ -72,6 +72,7 @@ RUN code-server  --install-extension eamodio.gitlens \
     && code-server --install-extension neverik.go-critic \
     && code-server --install-extension msyrus.go-doc \
     && code-server --install-extension premparihar.gotestexplorer \
+    && code-server --install-extension windmilleng.vscode-go-autotest \
     && code-server --install-extension aleksandra.go-group-imports
 
 ENV GOLANG_VERSION 1.12.7
