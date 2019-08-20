@@ -31,13 +31,14 @@ FROM codercom/code-server
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin
 
 # Google cloud sdk and some other tools
-RUN sudo apt-get update; sudo apt-get install -y bsdtar curl telnet iputils-ping netcat ssh rsync dnsutils gnupg gnupg2 gcc && \
+RUN sudo apt-get update; sudo apt-get install -y bsdtar curl telnet iputils-ping netcat ssh rsync dnsutils gnupg gnupg2 gcc python3-pip && \
     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
     sudo apt-get update; sudo apt-get install -y google-cloud-sdk && \
     wget -q https://storage.googleapis.com/kubernetes-helm/helm-v2.14.2-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > helm && \
     chmod +x helm && \
-    sudo mv helm /usr/local/bin/helm
+    sudo mv helm /usr/local/bin/helm \
+    sudo pip3 install awscli --upgrade
 
 # VSCode extensions
 RUN mkdir -p /home/coder/.local/share/code-server/extensions/
@@ -83,5 +84,5 @@ COPY --from=golang /usr/local/go /usr/local/go
 #   && tar -xf go1.12.7.linux-amd64.tar.gz --directory /usr/local \
 #   && rm go1.12.7.linux-amd64.tar.gz
 COPY --chown=coder:coder --from=golang /go/bin /home/coder/project/bin
-RUN mkdir /home/coder/project/src
+RUN mkdir -p /home/coder/project/src && chown -R coder:coder /home/coder
 
