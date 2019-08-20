@@ -37,7 +37,7 @@ RUN sudo apt-get update; sudo apt-get install -y bsdtar curl telnet iputils-ping
     sudo apt-get update; sudo apt-get install -y google-cloud-sdk && \
     wget -q https://storage.googleapis.com/kubernetes-helm/helm-v2.14.2-linux-amd64.tar.gz -O - | tar -xzO linux-amd64/helm > helm && \
     chmod +x helm && \
-    sudo mv helm /usr/local/bin/helm \
+    sudo mv helm /usr/local/bin/helm && \
     sudo pip3 install awscli --upgrade
 
 # VSCode extensions
