@@ -76,13 +76,11 @@ RUN code-server  --install-extension eamodio.gitlens \
     && code-server --install-extension windmilleng.vscode-go-autotest \
     && code-server --install-extension aleksandra.go-group-imports
 
-ENV GOLANG_VERSION 1.12.7
+ENV GOLANG_VERSION 1.13.0
 ENV GOPATH /home/coder/project
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 COPY --from=golang /usr/local/go /usr/local/go
-#UN wget https://dl.google.com/go/go1.12.7.linux-amd64.tar.gz \
-#   && tar -xf go1.12.7.linux-amd64.tar.gz --directory /usr/local \
-#   && rm go1.12.7.linux-amd64.tar.gz
+
 COPY --chown=coder:coder --from=golang /go/bin /home/coder/project/bin
 RUN mkdir -p /home/coder/project/src && chown -R coder:coder /home/coder
 
