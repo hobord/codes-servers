@@ -1,4 +1,4 @@
-FROM golang:1.12-stretch as golang
+FROM golang:1.13-buster as golang
 
 RUN go get -u -v github.com/mdempsky/gocode
 RUN go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs
