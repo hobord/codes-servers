@@ -22,6 +22,7 @@ RUN go get -u -v github.com/fatih/gomodifytags
 RUN go get -u -v github.com/josharian/impl
 RUN go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 RUN go get -u -v github.com/golang/dep/cmd/dep
+RUN go get golang.org/x/tools/gopls@latest
 
 
 
