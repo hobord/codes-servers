@@ -13,12 +13,12 @@ Tags / versions:
 ## Examples run
 
 ```
-docker run --rm -p 8443:8443 -name --privileged=true golangcode hobord/code-server:golang
+docker run --name golangcode --rm -p 8080:8080 --privileged=true hobord/code-server:golang
 ```
 
 or map some local project directory:
 ```
-docker run --rm -p 8443:8443 -v $(pwd):/home/coder/project/src/github.com/{YOURNAME}/{PROJECTREPODIR} -name --privileged=true hobord/code-server:golang
+docker run --rm -p 8080:8080 -v $(pwd):/home/coder/project/src/github.com/{YOURNAME}/{PROJECTREPODIR} --privileged=true hobord/code-server:golang
 ```
 
 ## Debuggers
@@ -26,15 +26,6 @@ docker run --rm -p 8443:8443 -v $(pwd):/home/coder/project/src/github.com/{YOURN
 ### Golang
   You should run the container with privileged permission ```--privileged=true``` for run debugger.
 
-### Chrome Debugger
-  Start the chrome:
-  ```
-    chrome.exe --remote-debugging-port=9222
-  ```
-  make accessible from remotely
-  ```
-  ssh -L 0.0.0.0:9223:localhost:9222 localhost -N
-  ```
 
 ## Some Startup parameters
 
