@@ -26,7 +26,7 @@ RUN GO111MODULE=on go get golang.org/x/tools/gopls@latest
 
 
 
-FROM codercom/code-server:2.1472-vsc1.38.1
+FROM codercom/code-server:v2
 
 # Kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin
